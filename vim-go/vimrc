@@ -1,0 +1,17 @@
+set nocompatible
+
+syntax on 
+
+set autoindent
+set smartindent
+set expandtab
+set ruler
+set number
+set showcmd
+set hlsearch
+set laststatus=2
+set wildmode=longest:list
+
+filetype plugin indent on
+
+autocmd Filetype go nnoremap <buffer> <C-]><C-]> :GoRef<CR>
