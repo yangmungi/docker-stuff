@@ -1,0 +1,15 @@
+arxiv
+datashader
+holoviews
+matplotlib
+langchain-openai
+langchain-anthropic
+llama-index
+numpy
+openpyxl
+pandas
+pandas-datareader
+plotly
+polygon-api-client
+scikit-learn
+scipy
