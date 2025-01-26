@@ -12,8 +12,8 @@ RUN /bin/bash install-apt.sh
 
 RUN mamba install -y jupyterlab jupyter_http_over_ws conda-forge::jupyter-ai
 
-COPY mamba-core-science.txt ./
-RUN mamba install -y --file mamba-core-science.txt
+COPY require-core-science.txt ./
+RUN mamba install -y --file require-core-science.txt
 
 FROM base AS basic
 
