@@ -1,4 +1,6 @@
-FROM condaforge/mambaforge:24.3.0-0 AS base
+ARG MAMBAFORGE_VERSION=24.3.0-0
+
+FROM condaforge/mambaforge:${MAMBAFORGE_VERSION} AS base
 
 RUN apt-get update --yes
 RUN apt-get upgrade --yes
@@ -24,10 +26,10 @@ FROM base AS multikernel
 # reference https://github.com/jupyter/docker-stacks/blob/main/datascience-notebook/Dockerfile
 # Other runtimes
 
-ARG julia_version="1.10.5"
+ARG JULIA_VERSION="1.10.5"
 ENV JULIA_DEPOT_PATH=/opt/julia \
     JULIA_PKGDIR=/opt/julia \
-    JULIA_VERSION="${julia_version}"
+    JULIA_VERSION="${JULIA_VERSION}"
 
 WORKDIR /srv/ipython
 
