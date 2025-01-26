@@ -1,5 +1,6 @@
 arxiv
 datashader
+dask
 holoviews
 matplotlib
 langchain-openai
