@@ -15,6 +15,12 @@ RUN mamba install -y jupyterlab jupyter_http_over_ws conda-forge::jupyter-ai
 COPY require-core-science.txt ./
 RUN mamba install -y --file require-core-science.txt
 
+COPY require-visualizers.txt ./
+RUN mamba install -y --file require-visualizers.txt
+
+COPY require-llms.txt ./
+RUN mamba install -y --file require-llms.txt
+
 FROM base AS basic
 
 WORKDIR /notebook
