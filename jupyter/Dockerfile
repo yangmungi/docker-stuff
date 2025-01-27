@@ -1,6 +1,6 @@
-ARG MAMBAFORGE_VERSION=24.3.0-0
+ARG MINIFORGE_VERSION=24.9.2-0
 
-FROM condaforge/mambaforge:${MAMBAFORGE_VERSION} AS base
+FROM condaforge/miniforge3:${MINIFORGE_VERSION} AS base
 
 RUN apt-get update --yes
 RUN apt-get upgrade --yes
@@ -10,7 +10,9 @@ WORKDIR /tmp
 COPY install-apt.sh ./
 RUN /bin/bash install-apt.sh
 
-RUN mamba install -y jupyterlab jupyter_http_over_ws conda-forge::jupyter-ai
+FROM base AS jupyter-dirty
+
+RUN mamba install -y jupyterlab jupyter_http_over_ws jupyter-ai
 
 COPY require-core-science.txt ./
 RUN mamba install -y --file require-core-science.txt
@@ -21,13 +23,13 @@ RUN mamba install -y --file require-visualizers.txt
 COPY require-llms.txt ./
 RUN mamba install -y --file require-llms.txt
 
-FROM base AS basic
-
 WORKDIR /notebook
+
+FROM jupyter-dirty AS jupyter
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-FROM base AS multikernel
+FROM jupyter AS multikernel
 
 # reference https://github.com/jupyter/docker-stacks/blob/main/datascience-notebook/Dockerfile
 # Other runtimes
