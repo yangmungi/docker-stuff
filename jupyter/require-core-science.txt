@@ -1,4 +1,6 @@
 arxiv
+h5py
+kaggle
 numpy
 openpyxl
 pandas
@@ -6,3 +8,5 @@ pandas-datareader
 polygon-api-client
 scikit-learn
 scipy
+seaborn
+statsmodels

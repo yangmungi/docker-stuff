@@ -1,5 +1,5 @@
 datashader
-dask
+dask==2024.12
 holoviews
 matplotlib
 plotly

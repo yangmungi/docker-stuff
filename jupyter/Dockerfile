@@ -21,7 +21,10 @@ COPY require-visualizers.txt ./
 RUN mamba install -y --file require-visualizers.txt
 
 COPY require-llms.txt ./
-RUN mamba install -y --file require-llms.txt
+RUN pip install -r require-llms.txt
+
+COPY torch.py ./
+RUN /bin/bash torch.py
 
 WORKDIR /notebook
 
