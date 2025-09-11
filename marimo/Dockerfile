@@ -9,4 +9,7 @@ WORKDIR /opt/marimo
 RUN uv venv
 RUN uv pip install marimo
 
+COPY requirements.txt /opt/
+RUN uv pip install -r /opt/requirements.txt
+
 CMD ["/bin/bash", "/opt/start.sh"]

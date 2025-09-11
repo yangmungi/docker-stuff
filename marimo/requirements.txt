@@ -1,0 +1,23 @@
+arxiv
+h5py
+kaggle
+numpy
+openpyxl
+pandas
+pandas-datareader
+polygon-api-client
+scikit-learn
+scipy
+seaborn
+statsmodels
+langchain-openai
+langchain-anthropic
+llama-index
+transformers
+safetensors
+# datashader 0.18.2 requires python < 3.10
+datashader==0.18.1
+dask==2024.12
+holoviews
+matplotlib
+plotly
