@@ -1,4 +1,5 @@
-ARG MINIFORGE_VERSION=24.9.2-0
+#ARG MINIFORGE_VERSION=24.9.2-0
+ARG MINIFORGE_VERSION=24.11.3-2
 
 FROM condaforge/miniforge3:${MINIFORGE_VERSION} AS base
 
@@ -12,19 +13,18 @@ RUN /bin/bash install-apt.sh
 
 FROM base AS jupyter-dirty
 
-RUN mamba install -y jupyterlab jupyter_http_over_ws jupyter-ai
-
+COPY require-jupyter.txt ./
 COPY require-core-science.txt ./
-RUN mamba install -y --file require-core-science.txt
-
 COPY require-visualizers.txt ./
-RUN mamba install -y --file require-visualizers.txt
+
+RUN /bin/bash -c "cat requires-*.txt >mamba-requirements.txt"
+RUN mamba install -y --file mamba-requirements.txt
 
 COPY require-llms.txt ./
 RUN pip install -r require-llms.txt
 
-COPY torch.py ./
-RUN /bin/bash torch.py
+COPY torch.py.sh ./
+RUN /bin/bash torch.py.sh
 
 WORKDIR /notebook
 
