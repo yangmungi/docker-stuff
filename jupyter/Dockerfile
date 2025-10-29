@@ -13,18 +13,16 @@ RUN /bin/bash install-apt.sh
 
 FROM base AS jupyter-dirty
 
+COPY torch.py.sh ./
+RUN /bin/bash torch.py.sh
+
 COPY require-jupyter.txt ./
 COPY require-core-science.txt ./
 COPY require-visualizers.txt ./
-
-RUN /bin/bash -c "cat requires-*.txt >mamba-requirements.txt"
-RUN mamba install -y --file mamba-requirements.txt
-
 COPY require-llms.txt ./
-RUN pip install -r require-llms.txt
 
-COPY torch.py.sh ./
-RUN /bin/bash torch.py.sh
+RUN /bin/bash -c "cat require-*.txt >mamba-requirements.txt"
+RUN pip install -r mamba-requirements.txt
 
 WORKDIR /notebook
 
